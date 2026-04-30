@@ -50,5 +50,5 @@ master_df['hour'] = master_df['timestamp'].dt.hour
 master_df['day_of_week'] = master_df['timestamp'].dt.dayofweek
 master_df['is_weekend'] = master_df['day_of_week'].isin([5, 6]).astype(int)
 
-master_df.to_csv("data/processed/toronto_energy_final.csv", index=False)
+master_df.to_csv("processed/toronto_energy_final.csv", index=False)
 print("Merge Complete! Your training data is ready.")
