@@ -6,7 +6,7 @@ STATION_ID = 51459
 YEARS = [2023, 2024, 2025]
 BASE_URL = "https://climate.weather.gc.ca/climate_data/bulk_data_e.html"
 
-output_dir = "data/raw/weather"
+output_dir = "weather"
 os.makedirs(output_dir, exist_ok=True)
 
 for year in YEARS:
