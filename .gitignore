@@ -1,0 +1,18 @@
+# PyCharm / JetBrains files
+.idea/
+cmake-build-*/
+out/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Ignore all CSVs just in case
+*.csv
+
+backend/backend/models/*.pkl
+
+*.pkl

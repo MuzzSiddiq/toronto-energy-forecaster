@@ -44,7 +44,13 @@ print(f"Average Demand: {avg_demand:.2f} MW")
 print(f"Estimated Accuracy: {accuracy_pct:.2f}%")
 
 # 7. Save the model to a file so the API can use it later
-os.makedirs("backend/models", exist_ok=True)
-joblib.dump(model, "backend/models/toronto_energy_model.pkl")
+os.makedirs("models", exist_ok=True)
+joblib.dump(model, "models/toronto_energy_model.pkl")
 print("Model saved to backend/models/toronto_energy_model.pkl")
 
+# Check Feature Importance
+importances = model.feature_importances_
+feature_names = features
+feature_importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': importances})
+print("\n--- Feature Importance ---")
+print(feature_importance_df.sort_values(by='Importance', ascending=False))
