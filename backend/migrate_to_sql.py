@@ -2,7 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 # 1. Load the CSV we made in Step 1 & 2
-df = pd.read_csv("data/processed/toronto_energy_final.csv")
+df = pd.read_csv("../data/processed/toronto_energy_final.csv")
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
 # 2. Connect to the Dockerized Postgres
