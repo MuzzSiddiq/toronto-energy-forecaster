@@ -3,9 +3,18 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 from sqlalchemy import create_engine, text
+from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI(title="Toronto Pluse API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, you'd specify the React URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 1. Load the ML Model at startup
 MODEL_PATH = "backend/models/toronto_energy_model.pkl" # edited this line to reflect actual path - make sure its right
