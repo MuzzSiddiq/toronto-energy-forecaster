@@ -11,7 +11,7 @@ venv/
 .venv/
 
 # Ignore all CSVs just in case
-*.csv
+
 
 backend/backend/models/*.pkl
 
