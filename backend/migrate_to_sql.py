@@ -2,7 +2,16 @@ from sqlalchemy import create_engine, text
 import pandas as pd
 
 # 1. Setup the connection to your Docker container
-engine = create_engine('postgresql://user:password@localhost:5432/toronto_pulse')
+
+EXTERNAL_URL = "postgresql://user:ZM0GnPNfhxiw11t3nlC13qF97eu5HmUk@dpg-d81ng1cdirrc73dpd9fg-a.oregon-postgres.render.com/toronto_pulse"
+
+
+if EXTERNAL_URL.startswith("postgres://"):
+    EXTERNAL_URL = EXTERNAL_URL.replace("postgres://", "postgresql://", 1)
+
+engine = create_engine(EXTERNAL_URL)
+
+# engine = create_engine('postgresql://user:password@localhost:5432/toronto_pulse')
 
 
 def migrate_data():
