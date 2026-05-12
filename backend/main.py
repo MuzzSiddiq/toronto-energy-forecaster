@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 # 1. Load the ML Model at startup
-MODEL_PATH = "models/toronto_energy_model.pkl" # edited this line to reflect actual path - make sure its right
+MODEL_PATH = "backend/models/toronto_energy_model.pkl" # edited this line to reflect actual path - make sure its right
 model = joblib.load(MODEL_PATH)
 
 # 2. Database Connection

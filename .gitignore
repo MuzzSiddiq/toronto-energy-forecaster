@@ -15,4 +15,3 @@ venv/
 
 backend/backend/models/*.pkl
 
-*.pkl
