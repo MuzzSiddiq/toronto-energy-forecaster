@@ -61,3 +61,15 @@ def predict_energy(data: PredictionInput):
 
     prediction = model.predict(input_df)[0]
     return {"predicted_demand_mw": round(prediction, 2)}
+
+
+@app.get("/forecast")
+def get_forecast():
+    """Fetches the 7-day predicted demand from the forecasts table"""
+    query = text("SELECT timestamp, predicted_demand FROM forecasts ORDER BY timestamp ASC")
+    with engine.connect() as conn:
+        result = conn.execute(query)
+        data = [{"timestamp": row[0], "predicted_demand": row[1]} for row in result]
+    return data
+
+
