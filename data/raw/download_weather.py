@@ -3,7 +3,7 @@ import os
 import time
 
 STATION_ID = 51459
-YEARS = [2023, 2024, 2025]
+YEARS = [2023, 2024, 2025, 2026]
 BASE_URL = "https://climate.weather.gc.ca/climate_data/bulk_data_e.html"
 
 output_dir = "weather"

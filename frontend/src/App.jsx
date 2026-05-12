@@ -11,8 +11,8 @@ function App() {
     // Fetch last 48 hours of data from your FastAPI backend
     axios.get('http://127.0.0.1:8000/history?limit=48')
       .then(res => {
-        // Reverse data so it flows left-to-right (past to present)
-        setHistory(res.data.reverse());
+        const sortedData = res.data.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        setHistory(sortedData);
         setLoading(false);
       })
       .catch(err => console.error("API Error:", err));

@@ -15,7 +15,7 @@ def download_latest_2026():
     os.makedirs(target_dir, exist_ok=True)
 
     # 3. Disguise our request so IESO doesn't hang up on us
-    url = "https://reports.ieso.ca/public/DemandZonal/PUB_DemandZonal_2026.csv"
+    url = "https://reports-public.ieso.ca/public/DemandZonal/PUB_DemandZonal_2026.csv"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
