@@ -21,7 +21,16 @@ MODEL_PATH = "backend/models/toronto_energy_model.pkl" # edited this line to ref
 model = joblib.load(MODEL_PATH)
 
 # 2. Database Connection
-DATABASE_URL = "postgresql://user:password@localhost:5432/toronto_pulse"
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    # Render (and Heroku) often use "postgres://", but SQLAlchemy 1.4+ requires "postgresql://"
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+else:
+    # This is your fallback for local development on your laptop
+    DATABASE_URL = "postgresql://user:password@localhost:5432/toronto_pulse"
+
 engine = create_engine(DATABASE_URL)
 
 
