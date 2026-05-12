@@ -4,6 +4,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { Activity, Thermometer, Zap, Settings2 } from 'lucide-react';
 
 function App() {
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
   const [history, setHistory] = useState([]);
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,8 +23,8 @@ function App() {
   const [prediction, setPrediction] = useState(null);
 
   useEffect(() => {
-    const fetchHistory = axios.get('http://127.0.0.1:8000/history?limit=72');
-    const fetchForecast = axios.get('http://127.0.0.1:8000/forecast');
+    const fetchHistory = axios.get(`${API_URL}/history?limit=72`);
+    const fetchForecast = axios.get(`${API_URL}/forecast`);
 
     Promise.all([fetchHistory, fetchForecast])
       .then(([historyRes, forecastRes]) => {
@@ -30,10 +33,10 @@ function App() {
         setLoading(false);
       })
       .catch(err => console.error("API Error:", err));
-  }, []);
+  }, [API_URL]);
 
   const runSimulation = () => {
-    axios.post('http://127.0.0.1:8000/predict', simParams)
+    axios.post(`${API_URL}/predict`, simParams)
       .then(res => setPrediction(res.data.predicted_demand_mw))
       .catch(err => console.error("Simulation Error:", err));
   };
