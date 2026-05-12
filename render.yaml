@@ -1,31 +1,33 @@
-services:
-  # 1. The Database
-  - type: database
-    name: toronto_pulse_db
-    plan: free # Note: Render free DBs expire after 90 days
+# 1. Databases go in their own top-level section
+databases:
+  - name: toronto_pulse_db
     databaseName: toronto_pulse
     user: user
+    plan: free
 
-  # 2. The FastAPI Backend
+# 2. Web services (API and Frontend) go here
+services:
+  # The FastAPI Backend
   - type: web
     name: toronto-pulse-api
     env: docker
     plan: free
     region: ohio
     dockerContext: .
-    dockerfilePath: backend/Dockerfile # You'll need to create this!
+    dockerfilePath: backend/Dockerfile
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: toronto_pulse_db
           property: connectionString
 
-  # 3. The React Frontend
+  # The React Frontend
   - type: web
     name: toronto-pulse-web
     env: static
+    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://toronto-pulse-api.onrender.com # Change this to your backend URL once live
+        value: https://toronto-pulse-api.onrender.com
