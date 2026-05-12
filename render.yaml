@@ -1,18 +1,16 @@
-# 1. Databases go in their own top-level section
 databases:
   - name: toronto_pulse_db
     databaseName: toronto_pulse
     user: user
     plan: free
 
-# 2. Web services (API and Frontend) go here
 services:
-  # The FastAPI Backend
+  # 1. The FastAPI Backend (Keep plan: free here)
   - type: web
     name: toronto-pulse-api
     env: docker
     plan: free
-    region: ohio
+    region: oregon
     dockerContext: .
     dockerfilePath: backend/Dockerfile
     envVars:
@@ -21,11 +19,11 @@ services:
           name: toronto_pulse_db
           property: connectionString
 
-  # The React Frontend
+  # 2. The React Frontend (REMOVE plan: free here)
   - type: web
     name: toronto-pulse-web
     env: static
-    plan: free
+    # plan: free  <-- REMOVED THIS LINE
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
