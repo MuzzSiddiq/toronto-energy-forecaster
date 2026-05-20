@@ -21,6 +21,7 @@ function App() {
     is_weekend: 0
   });
   const [prediction, setPrediction] = useState(null);
+  const [userRole, setUserRole] = useState('public');
 
   useEffect(() => {
     const fetchHistory = axios.get(`${API_URL}/history?limit=72`);
