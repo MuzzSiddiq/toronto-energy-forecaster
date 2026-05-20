@@ -2,10 +2,16 @@ import requests
 import pandas as pd
 import joblib
 from sqlalchemy import create_engine, text
+import os
 
 # step phase
 MODEL_PATH = "backend/models/toronto_energy_model.pkl" # update path if necessary
-engine = create_engine('postgresql://user:password@localhost:5432/toronto_pulse')
+EXTERNAL_URL = "postgresql://user:ZM0GnPNfhxiw11t3nlC13qF97eu5HmUk@dpg-d81ng1cdirrc73dpd9fg-a.oregon-postgres.render.com/toronto_pulse"
+
+if EXTERNAL_URL.startswith("postgres://"):
+    EXTERNAL_URL = EXTERNAL_URL.replace("postgres://", "postgresql://", 1)
+
+engine = create_engine(EXTERNAL_URL)
 
 def get_weather_forecast():
     # Toronto Coordinates: 43.65, -79.38
